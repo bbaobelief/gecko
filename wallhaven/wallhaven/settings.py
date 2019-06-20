@@ -55,7 +55,7 @@ IMAGES_STORE = '/home/zheng/Pictures/wallhaven'
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
-    'wispx.middlewares.RotateUserAgentMiddleware': 400,
+    'wallhaven.middlewares.RotateUserAgentMiddleware': 400,
 }
 
 # Enable or disable extensions
@@ -67,8 +67,8 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'wispx.pipelines.DownloadPipeline': 300,
-    'wispx.pipelines.JsonPipeline': 200,
+    'wallhaven.pipelines.DownloadPipeline': 300,
+    'wallhaven.pipelines.JsonPipeline': 200,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
