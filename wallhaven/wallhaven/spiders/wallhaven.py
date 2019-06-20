@@ -32,10 +32,10 @@ class WallhavenSpider(CrawlSpider):
 
         for i in content:
             item = WallhavenItem()
-            wallpaper_id = i.xpath(".//figure/@data-wallpaper-id").extract_first()
-            resolution = i.xpath(r".//figure/div/span/text()").extract_first()
+            data_src = i.xpath(r".//figure/img/@data-src").extract_first().split('/')
             data_href = i.xpath(r".//figure/div/a/@data-href").extract_first()
-            src = "https://w.wallhaven.cc/full/{0}/wallhaven-{1}.jpg".format(wallpaper_id[:2], wallpaper_id)
+            resolution = i.xpath(r".//figure/div/span/text()").extract_first()
+            src = "https://w.wallhaven.cc/full/{0}/wallhaven-{1}.jpg".format(data_src[-2], data_src[-1])
 
             item['url'] = data_href
             item['alt'] = resolution
