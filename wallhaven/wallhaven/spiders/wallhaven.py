@@ -35,7 +35,7 @@ class WallhavenSpider(CrawlSpider):
             data_src = i.xpath(r".//figure/img/@data-src").extract_first().split('/')
             data_href = i.xpath(r".//figure/div/a/@data-href").extract_first()
             resolution = i.xpath(r".//figure/div/span/text()").extract_first()
-            src = "https://w.wallhaven.cc/full/{0}/wallhaven-{1}.jpg".format(data_src[-2], data_src[-1])
+            src = "https://w.wallhaven.cc/full/{0}/wallhaven-{1}".format(data_src[-2], data_src[-1])
 
             item['url'] = data_href
             item['alt'] = resolution
