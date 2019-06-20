@@ -20,6 +20,7 @@ NEWSPIDER_MODULE = 'wallhaven.spiders'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
+IMAGES_STORE = '/home/zheng/Pictures/wallhaven'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -52,9 +53,10 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'wallhaven.middlewares.WallhavenDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+    'wispx.middlewares.RotateUserAgentMiddleware': 400,
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -64,9 +66,10 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'wallhaven.pipelines.WallhavenPipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'wispx.pipelines.DownloadPipeline': 300,
+    'wispx.pipelines.JsonPipeline': 200,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html

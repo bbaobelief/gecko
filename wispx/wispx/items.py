@@ -3,6 +3,7 @@ import scrapy
 
 
 class WispxItem(scrapy.Item):
+
     url = scrapy.Field()
     src = scrapy.Field()
     alt = scrapy.Field()

@@ -1,11 +1,23 @@
-# -*- coding: utf-8 -*-
+import os
+import json
+import codecs
+import scrapy
+from scrapy.pipelines.images import ImagesPipeline
 
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
+class JsonPipeline(object):
 
-class WallhavenPipeline(object):
     def process_item(self, item, spider):
+        base_dir = os.getcwd()
+        filename = base_dir + '/{0}.json'.format(spider.name)
+        with codecs.open(filename, 'a') as f:
+            line = json.dumps(dict(item), ensure_ascii=False) + '\n'
+            f.write(line)
         return item
+
+
+class DownloadPipeline(ImagesPipeline):
+
+    def get_media_requests(self, item, info):
+        src = item['src']
+        yield scrapy.Request(src)
