@@ -20,4 +20,4 @@ cd 项目 && python run.py
 ---
 - [x] [divnil](https://divnil.com/wallpaper)
 - [x] [wispx](https://wallpaper.wispx.cn/)
-- [ ] [wallhaven](https://wallhaven.cc)
+- [x] [wallhaven](https://wallhaven.cc)
