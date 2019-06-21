@@ -26,21 +26,13 @@ class WallhavenSpider(CrawlSpider):
             data = {"page": str(page)}
             yield self.next_page(dict(self.params, **data))
 
+
     def parse(self, response):
 
-        content = response.xpath("/html/body/main/div/section/ul/li")
+        links = response.xpath(r"/html/body/main/div/section/ul/li/figure/a/@href").extract()
 
-        for i in content:
-            item = WallhavenItem()
-            data_src = i.xpath(r".//figure/img/@data-src").extract_first().split('/')
-            data_href = i.xpath(r".//figure/a/@href").extract_first()
-            resolution = i.xpath(r".//figure/div/span/text()").extract_first()
-            src = "https://w.wallhaven.cc/full/{0}/wallhaven-{1}".format(data_src[-2], data_src[-1])
-
-            item['url'] = data_href
-            item['alt'] = resolution
-            item['src'] = src
-            yield item
+        for link in links:
+            yield scrapy.Request(url=link, callback=self.parse_item)
 
         # 下一页
         match_page = response.xpath(r"/html/body/main/div/section/header/h2/span[text()='2']/../text()").extract()
@@ -49,6 +41,17 @@ class WallhavenSpider(CrawlSpider):
             for page in range(3, int(last_page) + 1):
                 data = {"page": str(page)}
                 yield self.next_page(dict(self.params, **data))
+
+    def parse_item(self, response):
+        src = response.xpath(r"//img[@id='wallpaper']/@src").extract_first()
+        alt = response.xpath(r"//ul[@id='tags']/li/a[@class='tagname']/text()").extract()
+        url = response.xpath(r"//input[@id='wallpaper-short-url-copy']/@value").extract_first()
+
+        item = WallhavenItem()
+        item['url'] = url
+        item['alt'] = ','.join(alt)
+        item['src'] = src
+        yield item
 
     def next_page(self, params):
         url = self.start_url + urlencode(params)
