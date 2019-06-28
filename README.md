@@ -1,7 +1,7 @@
 # Gecko
 网站爬虫集合，收录好看的壁纸，电影。
 
-Scrapy 框架的一些简单使用，以后会尝试Asyncio,PySpider
+Scrapy 框架的一些简单使用，以后会尝试Asyncio, PySpider
 
 [![Python3](https://img.shields.io/badge/Python-3.6-green.svg?style=plastic)](https://www.python.org/)
 [![Scrapy](https://img.shields.io/badge/Scrapy-1.6.0-blue.svg?style=plastic)](https://scrapy.org)
