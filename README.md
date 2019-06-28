@@ -6,6 +6,13 @@
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 
+### 安装
+安装环境
+```
+git clone git@github.com:bbaobelief/gecko.git
+cd gecko
+pip3 install -r requirements.txt 
+```
 ### 创建
 创建新爬虫
 ```
